@@ -1,0 +1,57 @@
+{
+    "title": "LeetCode刷题",
+    "description": "LeetCode刷题",
+    "author": "何去何从gw",
+    "language": "zh-hans",
+    "root": ".",
+	"links" : {
+    "sidebar" : {
+        "百度一下" : "https://www.baidu.com"
+		}
+	},
+	"styles": {
+    "website": "styles/website.css",
+    "ebook": "styles/ebook.css",
+    "pdf": "styles/pdf.css",
+    "mobi": "styles/mobi.css",
+    "epub": "styles/epub.css"
+	},
+	"plugins": [
+			"fontsettings",
+			"sharing",
+			"lunr",
+			"search",
+			"search-pro",
+			"highlight",
+			"livereload",
+			"splitter",
+			"theme-comscore",
+			"latex-codecogs",
+			"atoc",
+			"ace",
+			"tbfed-pagefooter",
+			"back-to-top-button",
+			"code",
+			"klipse",
+			"lightbox",
+			"ancre-navigation",
+			"page-toc-button",
+			"simple-page-toc",
+			"flexible-alerts",
+			"chapter-fold",
+			"auto-scroll-table"
+			],
+	"pluginsConfig": { 
+		"tbfed-pagefooter": { 
+		"copyright":"Copyright © 何去何从gw 2019", 
+		"modify_label": "该文件修订时间：", 
+		"modify_format":" YYYY-MM-DD HH:mm:ss" 
+		},
+		"code": {
+        "copyButtons": true
+		},
+		"flexible-alerts": {
+		"style": "flat"
+		}
+	}
+}
