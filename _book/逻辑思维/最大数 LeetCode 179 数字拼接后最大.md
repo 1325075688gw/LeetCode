@@ -37,21 +37,25 @@
 python：(内置排序方法)
 
 ```python
-  def largestNumber(self, nums: List[int]) -> str:
-	   if sum(nums) == 0:
+class Solution:
+    
+    # 自定义排序算法
+    def largestNumber(self, nums: List[int]) -> str:
+        if sum(nums) == 0:
             return '0'
-        
         from functools import cmp_to_key
-        def xy_cmp(x,y):
-            if x+y>y+x:
-                return -1
-            elif x+y<y+x:
+        def func(x,y):
+            if x+y<y+x:
                 return 1
+            elif x+y>y+x:
+                return -1
             else:
                 return 0
-        nums = list(map(str,nums))
-        nums.sort(key=cmp_to_key(xy_cmp))
-        return ''.join(nums)
+        
+        arr = map(str, nums)
+        res = sorted(arr, key=cmp_to_key(func))
+        # print(res)
+        return ''.join(res)
         
 ```
 

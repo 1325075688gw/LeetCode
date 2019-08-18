@@ -116,27 +116,51 @@
 (动态规划3)：时间复杂度为o(nm)，空间复杂度为o(m)，需要m大小的额外空间，注意此方法和方法三的区别，方法三需要2m大小的额外空间，此方法只需要m大小的额外空间，在方法三中我们保存当前行s[i]中的元素，假设我们当前计算si，我们只需要知道si的值即可，不需要保存s[i]行中的元素。每次计算si时，我们需要更新up[j]的值。
 
 ```python
-        def minPathSum(self, grid):
-            if not grid or not grid[0]:return 0
-            n, m = len(grid), len(grid[0])
-            up = [grid[0][0]]*m
+class Solution:
+    def minPathSum(self, grid: List[List[int]]) -> int:
+        if not grid or not grid[0]:return 0
+        n, m = len(grid), len(grid[0])
+        
+        dp = [0]*m
+        dp[0] = grid[0][0]
+        for i in range(1,m):
+            dp[i] = dp[i-1] + grid[0][i]
+
+            
+        for i in range(1,n):
+            dp[0] = grid[i][0] + dp[0]
             for j in range(1,m):
-                up[j] = grid[0][j] + up[j-1]
-                
-            for i in range(1,n):
-                # 后面用到tmp，在这计算好tmp的值
-                # 给now【0】赋值
-                tmp = grid[i][0] + up[0]
-                # 计算up[0] = tmp ,给下次进来时候，tmp = grid[i][0] + up[0]赋值
-                up[0] = tmp 
-                for j in range(1,m):
-                    # 在这给其他up赋值
-                    tmp = min(up[j],tmp) + grid[i][j]
-                    up[j] = tmp
-            return up[-1]
+                dp[j]= min(dp[j],dp[j-1]) + grid[i][j]
+        return dp[-1]
 ```
 
 ##### 
 
-​          
+​        
+
+**java**
+
+```java
+class Solution {
+    public int minPathSum(int[][] grid) {
+        if (grid == null || grid[0].length == 0 || grid[0] == null || grid.length ==0)
+            return 0;
+
+        int res=0, n=grid.length, m=grid[0].length;
+        int[] dp = new int[m];
+        dp[0] = grid[0][0];
+        for (int i = 1; i < m; i++)
+            dp[i] = dp[i-1] + grid[0][i];
+        for (int i = 1; i < n; i++) {
+            dp[0] = dp[0] + grid[i][0];
+            for (int j = 1; j < m; j++) {
+                dp[j] = Math.min(dp[j-1], dp[j]) + grid[i][j];
+            }
+        }
+        return dp[m-1];
+    }
+}
+```
+
+
 

@@ -45,18 +45,18 @@
 ```python
 class Solution:
     def searchInsert(self, nums: List[int], target: int) -> int:
-        n = len(nums)
-        if n == 0:return 0
-        left, right = 0,n-1
-        while left <=right:
-            mid = (left+right)//2
-            if nums[mid] == target:
-                return mid
-            elif nums[mid] > target:
+        # 寻找插入点使用二分法，但与寻找某数字不同的是，需要考虑一些边界条件：
+        # 当插入数字和nums中某数字相等时，插入到左边还是右边？本题要求插到左边；
+        # 插入数字在nums第一个数字左边，或在最后一个数字右边；
+
+        left, right = 0, len(nums) - 1
+        while left <= right:
+            mid = (left + right) // 2
+            if nums[mid] < target: 
+                left = mid + 1 # insert left side
+            else: 
                 right = mid - 1
-            elif nums[mid] < target:
-                left = mid + 1
-        return right+1
+        return left
 ```
 
 

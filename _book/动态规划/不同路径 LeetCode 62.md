@@ -92,22 +92,20 @@ class Solution:
 **优化空间复杂度 O(n)**
 
 ```python
-def uniquePaths(self, m: int, n: int) -> int:
-    up = [1] * m
-    for i in range(1,n):
-        tmp = up[0] # tmp始终不变，
-        # 在这给up【0】赋值
-        # up[0] = tmp
-        for j in range(1,m):
-            tmp = up[j] + tmp
-            # 在这给其他up赋值
-            up[j] = tmp
-    return up[-1]
+
+class Solution:
+    def uniquePaths(self, m: int, n: int) -> int:
+        dp = [1] * n
+        for i in range(1,m):
+            # dp[0] = dp[0] 可省略，但是不省略含义更明确
+            for j in range(1,n):
+                dp[j] = dp[j-1] + dp[j]
+        return dp[-1]
 ```
 
 **排列组合**
 
-因为机器到底右下角，向下几步，向右几步都是固定的，
+因为机器到底右下角，向下几步，向右几步的总步数都是固定的，
 
 比如，m=3, n=2，我们只要向下 1 步，向右 2 步就一定能到达终点。
 
@@ -115,6 +113,8 @@ def uniquePaths(self, m: int, n: int) -> int:
 
 ```python
 阶层函数 math.factorial(n)
+ans = ((m-1 + n-1))!/(m-1)!(n-1)!
+Cnm = n! / [(n-m)! * m!]
 
 def uniquePaths(self, m: int, n: int) -> int:
         return int(math.factorial(m+n-2)/math.factorial(m-1)/math.factorial(n-1))
@@ -129,5 +129,42 @@ def func(n):
         return 1:
     else:
         return n*func(n-1)
+```
+
+
+
+```java
+class Solution {
+    public int uniquePaths(int m, int n) {
+        int[][] dp = new int[m][n];
+        
+        for (int i = 0; i < n; i++) dp[0][i] = 1;
+        for (int i = 0; i < m; i++) dp[i][0] = 1;
+        
+        for (int i = 1; i < m; i++) {
+            for (int j = 1; j < n; j++) {
+                dp[i][j] = dp[i][j-1] + dp[i-1][j];
+            }
+        }
+        
+        return dp[m-1][n-1];
+    }
+}
+
+class Solution {
+    public int uniquePaths(int m, int n) {
+        int[] dp = new int[n];
+        
+        for (int i = 0; i < n; i++) dp[i] = 1;
+
+        for (int i = 1; i < m; i++) {
+            for (int j = 1; j < n; j++) {
+                // dp[j-1]的值被更新为 dp[i][j-1], dp[j] 被更新为 dp[i-1][j]
+                dp[j] = dp[j-1] + dp[j];
+            }
+        }
+        return dp[n-1];
+    }
+}
 ```
 

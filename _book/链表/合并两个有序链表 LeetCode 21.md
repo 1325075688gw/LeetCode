@@ -20,6 +20,7 @@
 ##### 非递归
 
 ```python
+   # 对于链表的问题，根据以往的经验一般都是要建一个dummy node，连上原链表的头结点，这样的话就算头结点变动了，我们还可以通过dummy->next来获得新链表的头结点。
     def mergeTwoLists(self, l1: ListNode, l2: ListNode) -> ListNode:
         tail = head = ListNode(0)
         while l1 and l2:
@@ -86,5 +87,36 @@
             else:
                 l2.next = self.mergeTwoLists(l1, l2.next)
                 return l2
+```
+
+
+
+**java**
+
+```java
+class Solution {
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        if (l1 == null) return l2;
+        if (l2 == null) return l1;
+        ListNode dummy, head;
+        dummy = new ListNode(-1);
+        head = dummy;
+        
+        while (l1 != null && l2 != null) {
+            if (l1.val < l2.val) {
+                dummy.next = l1;
+                l1 = l1.next;
+            } else {
+                dummy.next = l2;
+                l2 = l2.next;
+            }
+            dummy = dummy.next;
+        }
+        if (l1 != null) dummy.next = l1;
+        if (l2 != null) dummy.next = l2;
+        
+        return head.next;
+    }
+}
 ```
 

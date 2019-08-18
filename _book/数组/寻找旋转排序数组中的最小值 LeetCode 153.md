@@ -8,7 +8,7 @@
 
 请找出其中最小的元素。
 
-你可以假设数组中不存在重复元素。
+##### 你可以假设数组中不存在重复元素。
 
 **示例 1:**
 
@@ -77,17 +77,18 @@
             return -1
         if len(nums) == 1:
             return nums[0]
+        # 没有旋转
         if nums[0] < nums[-1]:
             return nums[0]
         left, right = 0, len(nums)-1
-        while left+1 < right:
+        while left < right:
             mid = (left+right)//2
             # mid比right小，去左边查找
-            if nums[mid] < nums[-1]:
+            if nums[mid] < nums[right]:
                 right = mid
             else:
-                left = mid
-        return min(nums[left] , nums[right])
+                left = mid+1
+        return nums[left]
 ```
 
 #### 3.3代码3

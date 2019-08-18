@@ -29,15 +29,53 @@
 #### 3.代码
 
 ```python
+# class Solution:
+#     # 递归
+#     def coinChange(self, coins: List[int], amount: int) -> int:
+#         if amount == 0:return 0
+#         res = float('inf')
+#         for i in range(len(coins)):
+#             if coins[i]>amount:
+#                 continue
+#             tmp = self.coinChange(coins, amount-coins[i])
+#             if tmp == -1:
+#                 continue
+#             res = min(res, tmp+1)
+#         return res if res != float('inf') else -1
+        
+# 从上到下
+# class Solution:
+#     def coinChange(self, coins: List[int], amount: int) -> int:
+#         memo = [-2]*(amount+1)
+#         return self.func(coins, amount, memo)
+        
+#     def func(self, coins, amount, memo):
+#         if amount == 0:return 0
+#         res = float('inf')
+#         if memo[amount] != -2:
+#             return memo[amount]
+#         for i in range(len(coins)):
+#             # 金额不可达
+#             if coins[i]>amount:
+#                 continue
+#             tmp = self.func(coins, amount-coins[i], memo)
+#             # 子问题无解
+#             if tmp==-1:
+#                 continue
+#             res = min(res,tmp+1)
+#         # 记录本轮答案
+#         memo[amount] = res if res != float('inf') else -1
+#         return memo[amount]
+    
+class Solution:
     def coinChange(self, coins: List[int], amount: int) -> int:
-        dp = [float('inf')]*(amount+1)
+        dp = [amount+1] *(amount+1)
         dp[0] = 0
         for i in range(1,amount+1):
-            for coin in coins:
-                if coin <=i:
-                    dp[i] = min(dp[i],dp[i-coin]+1)
-       if dp[-1] == float('inf')
-  	   return -1
-       return dp[-1]
+            for j in coins:
+                if j<=i:
+                    dp[i] = min(dp[i], dp[i-j]+1)
+        return -1 if dp[amount] > amount else dp[amount]
+        
 ```
 

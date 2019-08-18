@@ -66,3 +66,20 @@ class Solution:
         return max_len
 ```
 
+
+
+```python
+class Solution:
+    def findLength(self, A: List[int], B: List[int]) -> int:
+        s1_len = len(A)
+        s2_len = len(B)
+        max_len = 0
+        # max_id = 0
+        mat = [[0]*(s2_len+1) for _ in range(s1_len+1)]
+        for i in range(1,s1_len+1):
+            for j in range(1,s2_len+1):
+                mat[i][j] = mat[i-1][j-1]+1 if A[i-1] == B[j-1] else 0
+                max_len = max(max_len, mat[i][j])
+        return max_len
+```
+

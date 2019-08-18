@@ -38,3 +38,25 @@ def hasPathSum(self, root: TreeNode, sum: int) -> bool:
         return self.hasPathSum(root.left,sum-root.val) or self.hasPathSum(root.right,sum-root.val)
     return False
 ```
+
+还有个办法就是回溯，然后统计结果集是否为空
+
+
+
+```python
+    def hasPathSum(self, root: TreeNode, sum: int) -> bool:
+        if not root:
+            return False
+        # 如果当前节点是叶子节点,且路径之和等于sum
+        if not root.left and not root.right and root.val == sum:
+            return True
+        left_is = False
+        if root.left:
+            left_is = self.hasPathSum(root.left,sum-root.val) 
+        right_is = False
+        if root.right:
+            right_is = self.hasPathSum(root.right,sum-root.val)
+        return left_is or right_is
+
+```
+

@@ -57,14 +57,66 @@ class Solution:
         dummy = ListNode(0)
         dummy.next = head
         fast = slow = dummy
-        while n>=0:
+        # 这个比查找倒数第N个节点多走一步,因为我们需要找到倒数第N+1个节点,我们才能删除倒数第N个节点
+        # 大于0，就是走n步
+        while n>0:
             n -= 1
             fast = fast.next
-        while fast is not None:
+        # 退出循环的条件为fast指向最后个节点
+        while fast.next:
             fast = fast.next
             slow = slow.next
         slow.next = slow.next.next
         return dummy.next
             
+```
+
+
+
+```python
+    def removeNthFromEnd(self, head: ListNode, n: int) -> ListNode:       
+    
+    # 为了更好的处理删除头结点情况,我们一般都会设置虚拟节点
+        dummy = ListNode(0)
+        dummy.next = head
+        fast = slow = dummy
+        count = 0
+        # 退出循环的条件是fast刚好指向最后个节点。此时,slow指向倒数第n+1个节点,这样就能删除倒数第n个节点
+        while fast.next:
+            count += 1
+            # 先让fast走n步,第n+1步时候,slow也开始走
+            if count > n:
+                slow = slow.next
+            fast = fast.next
+            
+        # 如果题目增加难度,说如果n不满足条件,就返回None,就可以用下面两句
+        # if count < n:
+        #     return None
+        
+        slow.next = slow.next.next
+        return dummy.next
+```
+
+
+
+```python
+        def removeNthFromEnd(self, head, n):
+            """
+            :type head: ListNode
+            :type n: int
+            :rtype: ListNode
+            """
+            # 思路：双指针法。
+            slow = fast = head
+            for i in range(n):          # 先让fast走n步
+                fast = fast.next
+            if fast == None:            # 若走了n步后为None，则表明删除的为head节点
+                return head.next
+
+            while fast.next != None:    # slow和fast同时往前走
+                slow = slow.next        # 当fast走到头时，second即是要删除节点的前一个节点位置
+                fast = fast.next
+            slow.next = slow.next.next  # 删除该节点
+            return head
 ```
 

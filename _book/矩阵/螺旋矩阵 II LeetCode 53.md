@@ -46,6 +46,7 @@ def generateMatrix(self, n):
                 matrix[i][r] += index
             r -= 1
         
+        	# l-1不会被遍历
             for i in range(r,l-1,-1):
                 index += 1
                 matrix[d][i] += index
@@ -61,4 +62,58 @@ def generateMatrix(self, n):
 ```
 
 
+
+**java**
+
+```java
+class Solution {
+    public int[][] generateMatrix(int n) {
+        int[][] res = new int[n][n];
+        int u=0, d=n-1, l=0, r=n-1;
+        int num = 1;
+        
+        while (true) {
+            for (int i = l; i <= r; i++) res[u][i] = num++;
+            if (++u > d) break;
+            
+            for (int i = u; i <= d; i++) res[i][r] = num++;
+            if (--r < l) break;
+            
+            for (int i = r; i >= l; i--) res[d][i] = num++;
+            if (--d < u) break;
+            
+            for (int i = d; i >= u; i--) res[i][l] = num++;
+            if(++l > r) break;
+        }
+        
+        return res;
+    }
+}
+
+```
+
+
+
+**java**
+
+```java
+public int[][] generateMatrix(int n) {
+
+        int l = 0, r = n - 1, t = 0, b = n - 1;
+        int[][] mat = new int[n][n];
+        int num = 1, tar = n * n;
+        while(num <= tar){
+            for(int i = l; i <= r; i++) mat[t][i] = num++; // left to right.
+            t++;
+            for(int i = t; i <= b; i++) mat[i][r] = num++; // top to bottom.
+            r--;
+            for(int i = r; i >= l; i--) mat[b][i] = num++; // right to left.
+            b--;
+            for(int i = b; i >= t; i--) mat[i][l] = num++; // bottom to top.
+            l++;
+        }
+        return mat;
+
+    }
+```
 

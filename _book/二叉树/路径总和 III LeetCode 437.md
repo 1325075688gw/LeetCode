@@ -64,3 +64,25 @@ def func(self, root, sum):
     right = self.func(root.right, sum)
     return res+left+right
 ```
+
+
+```python
+class Solution:
+    def pathSum(self, root: TreeNode, sum: int) -> int:
+        if root == None: return 0
+        res = 0
+        res += self.func(root, sum) + self.pathSum(root.left, sum)  + self.pathSum(root.right, sum)
+        return res
+
+    def func(self, root, sum):
+        if root == None:
+            return 0
+        sum -= root.val
+        if sum == 0:
+            # print(sum)
+            return 1+ self.func(root.left, sum) + self.func(root.right, sum)
+        else:
+            return self.func(root.left, sum) + self.func(root.right, sum)
+        
+```
+

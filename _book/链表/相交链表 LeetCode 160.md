@@ -65,6 +65,7 @@
         # 首尾相连法
         if headA is None or headB is None:
             return None
+        # 因为过一会还要用headB，headA，所以这儿先用其他变量保存
         p = headA
         q = headB
         while p != q:

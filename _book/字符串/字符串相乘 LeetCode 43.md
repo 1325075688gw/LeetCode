@@ -33,6 +33,10 @@
 
 首先要说明的是 我们是按照从左向右的顺序存储的数字。我们注意到对于index:i和index:j相乘的话，结果在index:i+j和index:i+j+1上。
 
+
+
+![image.png](字符串相乘 LeetCode 43.assets/171cad48cd0c14f565f2a0e5aa5ccb130e4562906ee10a84289f12e4460fe164-image.png)
+
 #### 3.代码
 
 ##### 代码1
@@ -44,6 +48,7 @@
         res = [0] * (num1_len + num2_len)
         for i in range(num1_len-1,-1,-1):
             for j in range(num2_len-1,-1,-1):
+                # 从右向左，所以res[i+j+1]我们可以获取得到
                 tmp = int(num1[i]) * int(num2[j]) + int(res[i+j+1])
                 res[i+j+1] = tmp%10
                 res[i+j] = res[i+j] + tmp//10
@@ -54,6 +59,29 @@
                 return ''.join(res[i:])
         return '0'
 ```
+
+
+
+```python
+    def multiply(self, num1: str, num2: str) -> str:
+        
+        num1_len = len(num1)
+        num2_len = len(num2)
+        res = [0] *(num1_len+num2_len)
+        
+        for i in range(num1_len-1,-1,-1):
+            for j in range(num2_len-1,-1,-1):
+                tmp = int(num1[i]) * int(num2[j]) + res[i+j+1]
+                res[i+j+1] = tmp % 10
+                res[i+j] += tmp//10
+        
+        for i in range(num1_len+num2_len):
+            if res[i] != 0:
+                return ''.join(map(str,res[i:]))
+        return '0'
+```
+
+
 
 ##### 代码2（大神版）
 

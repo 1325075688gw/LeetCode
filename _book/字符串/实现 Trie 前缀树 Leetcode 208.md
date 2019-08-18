@@ -29,6 +29,14 @@ trie.search("app");     // 返回 true
 
       前缀树的功能很强大，可以做文本词频统计，例如我们在搜索框中的搜索提示，就可以利用前缀树实现。因此，前缀树基本的操作是字符串的插入，搜索，删除，查找前缀等。
 
+```python
+apple:{'a': {'p': {'p': {'l': {'e': {'end': True}}}}}}             #第一次insert，最后一个'e'存在结束'end'
+app:  {'a': {'p': {'p': {'l': {'e': {'end': True}}, 'end': True}}}}#第二次insert，第二个'p'存在结束'end'
+
+```
+
+
+
 #### 3.代码
 
 ##### 法一
@@ -92,7 +100,7 @@ class Trie:
 # param_3 = obj.startsWith(prefix)
 ```
 
-##### 法2
+##### 法2(推荐)
 
 ```python
 class Trie(object):
@@ -120,7 +128,7 @@ class Trie(object):
         for char in word:
             if char not in node:
                 node[char] = {}
-            node['end'] = True
+        node['end'] = True
          =========================================================================   
         
 
