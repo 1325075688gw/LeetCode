@@ -57,7 +57,7 @@
         index = 1
         # 跳过第一个字符，因为第一个字符有可能是‘+-’
         # 之所以用s[index].isdigit(),是因为有可能这种情况，‘0012a42’
-        # 忍不住想吐槽LeetCode，日你妈，题目说明不完善，操你大爷的！！！！
+
         while index < length and s[index].isdigit():
             index += 1
         if index == 1 and s[0] in '+-':
@@ -67,5 +67,45 @@
             return max(-2147483648, result)
         else:
             return min(2147483647, result)
+```
+
+
+
+
+
+```python
+class Solution:
+    def StrToInt(self, s):
+        # write code here
+        if s == '0' or not s:
+            return 0
+        flag = 1
+        if s[0] == '+':
+            flag = True
+            if not s[1:].isdigit():
+                return 0
+        elif s[0] == '-':
+            flag = False
+            if not s[1:].isdigit():
+                return 0
+        elif not s.isdigit():
+            flag = None
+            return 0
+        
+        res = 0
+        if flag is 1:
+            n = len(s)
+            m = n
+            while n>0:
+                n -= 1
+                res += int(s[n])*10**(m-n-1)
+            return res
+        if flag is True or flag is False:
+            n = len(s)
+            m = n
+            while n>1:
+                n -= 1
+                res += int(s[n])*10**(m-n-1)
+            return res if flag else -res
 ```
 

@@ -43,6 +43,8 @@
             if s[i] == ' ':
                 self.func(s, start, i-1)
                 start = i+1
+                
+        # 最后个单词，最后没有空格，所以循环内反转不了，所以我们需要单独提出来反转
         self.func(s, start, len(s)-1)
         res = ''.join(s)
         # print(res)
@@ -56,6 +58,36 @@
             s[e] = tmp
             b += 1
             e -= 1
-            
+      
+    
+    
+    
+```
+
+
+
+****
+
+```python
+按照空格split
+
+然后堆每个字符串进行反转
+
+然后join
+
+        #法3：多次翻转:分成两部分，先各自单独翻转，再总体翻转
+        if not s or not n:
+            return s
+        s=list(s)
+        s=self.reverse_array(s,0,n-1)
+        s=self.reverse_array(s,n,len(s)-1)
+        s=self.reverse_array(s,0,len(s)-1)
+        return ''.join(x for x in s)
+    def reverse_array(self,array,start,end):
+        while start<end:
+            array[start],array[end]=array[end],array[start]
+            start+=1
+            end-=1
+        return array
 ```
 

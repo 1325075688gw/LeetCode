@@ -62,6 +62,8 @@ class Solution:
         	dif = target - value
         	if dif in bag:
         		return [index, bag[dif]]
+            else:
+                bag[value] = index
         return []
 ```
 
