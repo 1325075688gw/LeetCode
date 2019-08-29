@@ -128,6 +128,7 @@ class Trie(object):
         for char in word:
             if char not in node:
                 node[char] = {}
+            node = node[char]
         node['end'] = True
          =========================================================================   
         
