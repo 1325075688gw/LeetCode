@@ -112,7 +112,7 @@ class Solution(object):
         if not head or not head.next:
             return None
         fast = slow = head
-        while fast.next and fast.next.next:
+        while fast and fast.next:
             fast = fast.next.next
             slow = slow.next
             if fast == slow:
